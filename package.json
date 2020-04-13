@@ -2,6 +2,7 @@
   "name": "debug-gradle-action",
   "scripts": {
     "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
+    "prebuild": "rm -rf dist",
     "build": "babel src --out-dir dist --copy-files --extensions \".ts,.tsx\"",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
@@ -20,7 +21,13 @@
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.2",
+    "husky": "^4.2.5",
     "nodemon": "^2.0.3",
     "typescript": "^3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn build && git add dist"
+    }
   }
 }
