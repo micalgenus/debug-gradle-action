@@ -29,5 +29,8 @@
     "hooks": {
       "pre-commit": "yarn build && git add dist"
     }
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.3"
   }
 }
