@@ -1,0 +1,11 @@
+name: 'debug-gradle'
+author: micalgenus
+description: 'Export to web site from result of gradle'
+
+runs:
+  using: 'node12'
+  main: 'dist/main.js'
+
+branding:
+  icon: settings
+  color: gray-dark
