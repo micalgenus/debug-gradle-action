@@ -5,7 +5,7 @@ on:
       - master
 
 jobs:
-  check:
+  test:
     name: Code checking
     runs-on: ubuntu-latest
 
@@ -28,4 +28,10 @@ jobs:
       - name: debug-gradle
         uses: micalgenus/debug-gradle-action@v1
         with:
-          gradle-build-path: test
+          gradle-build-path: test/gradle
+
+      - name: Run action
+        run: yarn test:action
+
+      - name: Run post-action
+        run: yarn test:post-action
