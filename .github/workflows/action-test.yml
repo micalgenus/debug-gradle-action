@@ -1,0 +1,36 @@
+name: github-actions/pull-request/action-test
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  test:
+    name: Action test
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 12
+
+      - name: Cache node modules
+        uses: actions/cache@v1
+        with:
+          path: ./node_modules
+          key: node-${{ hashFiles('yarn.lock') }}
+          restore-keys: node-
+
+      - name: Install packages
+        run: yarn
+
+      - uses: micalgenus/debug-gradle-action@v1
+        with:
+          gradle-build-path: test/gradle
+
+      - name: Run action
+        run: yarn test:action
+
+      - name: Run post-action
+        run: yarn test:post-action

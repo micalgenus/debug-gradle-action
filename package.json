@@ -1,9 +1,12 @@
 {
   "name": "debug-gradle-action",
   "scripts": {
-    "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
     "prebuild": "rm -rf dist",
     "build": "babel src --out-dir dist --copy-files --extensions \".ts,.tsx\"",
+    "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
+    "test:action": "node -r ./test/babel.js ./src/action.ts",
+    "test:post-action": "node -r ./test/babel.js ./src/post-action.ts",
+    "test": "",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
     "type-check": "tsc --noEmit **/*.ts"
@@ -14,6 +17,7 @@
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
+    "@babel/register": "^7.9.0",
     "@types/node": "^13.11.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
@@ -29,5 +33,8 @@
     "hooks": {
       "pre-commit": "yarn build && git add dist"
     }
+  },
+  "dependencies": {
+    "@actions/core": "^1.2.3"
   }
 }
