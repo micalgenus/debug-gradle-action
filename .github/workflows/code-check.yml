@@ -26,7 +26,7 @@ jobs:
         run: yarn
 
       - name: Lint
-        run: yarn tslint
+        run: yarn lint
 
       - name: Typescript syntax checking
         run: yarn type-check
