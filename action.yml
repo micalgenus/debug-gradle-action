@@ -10,8 +10,8 @@ inputs:
 
 runs:
   using: 'node12'
-  main: 'dist/action.js'
-  post: 'dist/post-action.js'
+  main: 'dist/action/index.js'
+  post: 'dist/post-action/index.js'
   post-if: 'failure()'
 
 branding:
