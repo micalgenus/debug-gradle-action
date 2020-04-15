@@ -34,3 +34,6 @@ jobs:
 
       - name: Run post-action
         run: yarn test:post-action
+
+      - name: Fail test
+        run: exit 1
