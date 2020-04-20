@@ -1,17 +1,10 @@
 import * as core from '@actions/core';
-import { testBuildPath, testResultExtensions } from '@/utils/test';
 
-const isTest = process.env.NODE_ENV === 'test';
-
-const buildPath = isTest ? testBuildPath : core.getInput('gradle-build-path');
-const resultExtensions = isTest ? testResultExtensions : core.getInput('result-extensions');
-
-async function run(): Promise<void> {
+export async function run(path: string, extensions: string): Promise<void> {
   try {
-    const extensions = resultExtensions.split(',').filter((extension) => extension);
+    const ext = extensions.split(',').filter((extension) => extension);
 
-    console.log(buildPath);
-    console.log(extensions);
+    console.log(ext);
 
     return;
   } catch (error) {
@@ -19,6 +12,8 @@ async function run(): Promise<void> {
   }
 }
 
-run();
+export const runner = () => {
+  return run(core.getInput('gradle-build-path'), core.getInput('result-extensions'));
+};
 
-export default run;
+export default runner;

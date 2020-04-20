@@ -1,3 +1,3 @@
-import app from '@/server/app';
+import app from './server/app';
 
-app.listen(3000, () => console.log('start'));
+app.listen(3000, () => {});

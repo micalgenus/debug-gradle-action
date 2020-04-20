@@ -1,8 +1,8 @@
-import express, { Request, Response } from 'express';
+import * as express from 'express';
 
 const app = express();
 
-app.post('/ping', (req: Request, res: Response) => {
+app.post('/ping', (req: express.Request, res: express.Response) => {
   res.send('Pong !!');
 });
 

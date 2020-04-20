@@ -8,28 +8,8 @@
     // TypeScript ESLint recommanded style 적용
     "plugin:@typescript-eslint/eslint-recommended"
   ],
-  "settings": {
-    "import/resolver": {
-      "alias": {
-        "extensions": [".js", ".android.js", ".ios.js", ".web.js"],
-        "map": ["@", "./src"]
-      }
-    }
-  },
   "rules": {
     "no-unused-vars": "off",
-    "@typescript-eslint/no-unused-vars": ["error"],
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        "": "never",
-        "js": "never",
-        "mjs": "never",
-        "jsx": "never",
-        "ts": "never",
-        "tsx": "never"
-      }
-    ]
+    "@typescript-eslint/no-unused-vars": ["error"]
   }
 }

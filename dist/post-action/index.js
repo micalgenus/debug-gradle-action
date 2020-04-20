@@ -358,14 +358,6 @@ module.exports = require("path");
 
 /***/ }),
 
-/***/ 691:
-/***/ (function(module) {
-
-module.exports = eval("require")("./utils/test");
-
-
-/***/ }),
-
 /***/ 749:
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
@@ -375,33 +367,31 @@ module.exports = eval("require")("./utils/test");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.run = run;
+exports.default = exports.runner = void 0;
 
 var core = _interopRequireWildcard(__webpack_require__(470));
-
-var _test = __webpack_require__(691);
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-const isTest = process.env.NODE_ENV === 'test';
-const buildPath = isTest ? _test.testBuildPath : core.getInput('gradle-build-path');
-const resultExtensions = isTest ? _test.testResultExtensions : core.getInput('result-extensions');
-
-async function run() {
+async function run(path, extensions) {
   try {
-    const extensions = resultExtensions.split(',').filter(extension => extension);
-    console.log(buildPath);
-    console.log(extensions);
+    const ext = extensions.split(',').filter(extension => extension);
+    console.log(ext);
     return;
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-run();
-var _default = run;
+const runner = () => {
+  return run(core.getInput('gradle-build-path'), core.getInput('result-extensions'));
+};
+
+exports.runner = runner;
+var _default = runner;
 exports.default = _default;
 
 /***/ })
