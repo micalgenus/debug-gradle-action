@@ -7,5 +7,24 @@
     "airbnb-base",
     // TypeScript ESLint recommanded style 적용
     "plugin:@typescript-eslint/eslint-recommended"
-  ]
+  ],
+  "rules": {
+    "import/resolver": {
+      "alias": {
+        "map": [["@", "./"]],
+        "extensions": [".ts", ".js", ".jsx", ".json"]
+      }
+    },
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "mjs": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ]
+  }
 }
