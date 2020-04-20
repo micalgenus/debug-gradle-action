@@ -3,7 +3,7 @@
   "scripts": {
     "prebuild": "rm -rf build dist",
     "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
-    "postbuild": "yarn bundle:action && yarn bundle:post-action",
+    "bundle": "yarn bundle:action && yarn bundle:post-action",
     "bundle:action": "ncc build build/action.js -o dist/action",
     "bundle:post-action": "ncc build build/post-action.js -o dist/post-action",
     "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
@@ -45,7 +45,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn build && git add dist"
+      "pre-commit": "yarn build && yarn bundle && git add dist"
     }
   }
 }
