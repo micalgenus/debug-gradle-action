@@ -1,21 +1,23 @@
 {
   "name": "debug-gradle-action",
   "scripts": {
-    "prebuild": "rm -rf build dist",
+    "prebuild": "rm -rf build",
     "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
-    "postbuild": "yarn bundle:action && yarn bundle:post-action",
+    "prebundle": "rm -rf dist",
+    "bundle": "yarn bundle:action && yarn bundle:post-action",
     "bundle:action": "ncc build build/action.js -o dist/action",
     "bundle:post-action": "ncc build build/post-action.js -o dist/post-action",
     "dev": "NODE_ENV=test nodemon --legacy-watch src/* --exec babel-node --extensions \".ts,.tsx\" src/index.ts",
-    "test:action": "node -r ./test/babel.js ./src/action.ts",
-    "test:post-action": "node -r ./test/babel.js ./src/post-action.ts",
-    "test": "",
+    "test": "mocha -t 10000 -r ./src/test/babel.js ./src/test/**/*.test.ts",
+    "test:action": "NODE_ENV=test node -r ./src/test/babel.js ./src/action.ts",
+    "test:post-action": "NODE_ENV=test node -r ./src/test/babel.js ./src/post-action.ts",
     "lint": "eslint src/**/*.ts",
     "lint:fix": "eslint --fix src/**/*.ts",
-    "type-check": "tsc --noEmit **/*.ts"
+    "type-check": "tsc --noEmit **/*.ts --esModuleInterop"
   },
   "dependencies": {
-    "@actions/core": "^1.2.3"
+    "@actions/core": "^1.2.3",
+    "express": "^4.17.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
@@ -24,21 +26,28 @@
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-typescript": "^7.9.0",
     "@babel/register": "^7.9.0",
+    "@types/express": "^4.17.6",
+    "@types/mocha": "^7.0.2",
     "@types/node": "^13.11.1",
     "@typescript-eslint/eslint-plugin": "^2.27.0",
     "@typescript-eslint/parser": "^2.27.0",
     "@zeit/ncc": "^0.22.1",
     "babel-plugin-module-resolver": "^4.0.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "eslint-plugin-import": "^2.20.2",
     "husky": "^4.2.5",
+    "mocha": "^7.1.1",
     "nodemon": "^2.0.3",
+    "superagent": "^5.2.2",
     "typescript": "^3.8.3"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn build && git add dist"
+      "pre-commit": "yarn build && yarn bundle && git add dist"
     }
   }
 }

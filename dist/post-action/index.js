@@ -367,7 +367,8 @@ module.exports = require("path");
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.run = run;
+exports.default = exports.runner = void 0;
 
 var core = _interopRequireWildcard(__webpack_require__(470));
 
@@ -375,16 +376,24 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
-async function run() {
+async function run(path, extensions) {
   try {
+    const ext = extensions.split(',').filter(extension => extension);
+
+    (extension => {
+      extension.map(e => `(${e})`);
+    })(ext);
+
     return;
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-run();
-var _default = run;
+const runner = () => run(core.getInput('gradle-build-path'), core.getInput('result-extensions'));
+
+exports.runner = runner;
+var _default = runner;
 exports.default = _default;
 
 /***/ })

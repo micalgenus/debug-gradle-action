@@ -6,7 +6,11 @@ inputs:
   gradle-build-path:
     required: false
     default: ./build/
-    description: Path of result files for gradle.
+    description: Path of result files for gradle from project root directory.
+  result-extensions:
+    required: false
+    default: txt,xml,html,css,js,jpg,png,gif
+    description: Extension of files for export to artifacts.
 
 runs:
   using: 'node12'

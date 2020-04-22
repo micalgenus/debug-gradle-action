@@ -25,7 +25,8 @@ jobs:
       - name: Install packages
         run: yarn
 
-      - uses: micalgenus/debug-gradle-action@v2
+      - name: Github actions test
+        uses: ./
         with:
           gradle-build-path: test/gradle
 
