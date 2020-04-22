@@ -379,16 +379,13 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 async function run(path, extensions) {
   try {
     const ext = extensions.split(',').filter(extension => extension);
-    console.log(ext);
     return;
   } catch (error) {
     core.setFailed(error.message);
   }
 }
 
-const runner = () => {
-  return run(core.getInput('gradle-build-path'), core.getInput('result-extensions'));
-};
+const runner = () => run(core.getInput('gradle-build-path'), core.getInput('result-extensions'));
 
 exports.runner = runner;
 var _default = runner;
