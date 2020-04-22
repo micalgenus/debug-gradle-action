@@ -1,8 +1,9 @@
 {
   "name": "debug-gradle-action",
   "scripts": {
-    "prebuild": "rm -rf build dist",
+    "prebuild": "rm -rf build",
     "build": "babel src --out-dir build --copy-files --extensions \".ts,.tsx\"",
+    "prebundle": "rm -rf dist",
     "bundle": "yarn bundle:action && yarn bundle:post-action",
     "bundle:action": "ncc build build/action.js -o dist/action",
     "bundle:post-action": "ncc build build/post-action.js -o dist/post-action",
