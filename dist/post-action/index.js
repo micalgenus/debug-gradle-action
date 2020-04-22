@@ -379,6 +379,11 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 async function run(path, extensions) {
   try {
     const ext = extensions.split(',').filter(extension => extension);
+
+    (extension => {
+      extension.map(e => `(${e})`);
+    })(ext);
+
     return;
   } catch (error) {
     core.setFailed(error.message);
