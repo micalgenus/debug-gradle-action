@@ -2,7 +2,7 @@ import express from 'express';
 
 const app = express();
 
-app.post('/ping', (req: express.Request, res: express.Response) => {
+app.post('/ping', (req, res) => {
   res.send('Pong !!');
 });
 
