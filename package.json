@@ -7,7 +7,6 @@
     "bundle": "yarn bundle:action && yarn bundle:post-action",
     "bundle:action": "ncc build build/action.js -o dist/action",
     "bundle:post-action": "ncc build build/post-action.js -o dist/post-action",
-    "test": "NODE_ENV=test mocha -t 10000 -r ./src/test/babel.js ./src/test/**/*.test.ts",
     "test:action": "NODE_ENV=test node -r ./src/test/babel.js ./src/action.ts",
     "test:post-action": "NODE_ENV=test node -r ./src/test/babel.js ./src/post-action.ts",
     "lint": "eslint src/**/*.ts",
