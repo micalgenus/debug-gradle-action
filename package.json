@@ -14,7 +14,7 @@
     "type-check": "tsc --noEmit **/*.ts --esModuleInterop"
   },
   "dependencies": {
-    "@actions/core": "^1.2.6"
+    "@actions/core": "^1.9.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.8.4",
